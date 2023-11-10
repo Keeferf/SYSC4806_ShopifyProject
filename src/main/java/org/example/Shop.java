@@ -9,7 +9,7 @@ public class Shop {
     private Long id = null;
     private String shopName = null;
     private String shopDescription = null;
-    @OneToMany
+    @OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Product> products = null;
 
     //Enum for the category possibly

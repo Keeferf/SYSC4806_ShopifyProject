@@ -17,4 +17,16 @@ public class Product {
         this.productInventory = inventory;
     }
     public Product(){}
+
+    public Long getId(){
+        return this.id;
+    }
+    public void setId(Long id){
+        this.id = id;
+    }
+
+    @Override
+    public String toString(){
+        return "Product name: " + productName + "\n Description: " + productDescription + "\n Inventory: " + productInventory;
+    }
 }
