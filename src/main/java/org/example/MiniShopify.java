@@ -7,6 +7,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @SpringBootApplication
 public class MiniShopify {
     private static final Logger log = LoggerFactory.getLogger(MiniShopify.class);
@@ -22,7 +25,9 @@ public class MiniShopify {
             Product product2 = new Product("knife", "to cut things", 6);
 
             //create a shop and add products
-            Shop shop1 = new Shop("Carl's Appliances");
+            Set<Category> categories = new HashSet<>();
+            categories.add(Category.APPLIANCES);
+            Shop shop1 = new Shop("Carl's Appliances","kitchen stuff", categories);
             shop1.addProduct(product1);
             shop1.addProduct(product2);
 

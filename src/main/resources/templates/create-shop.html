@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mini-Shopify - Create a New Shop</title>
+    <!-- Add link to your CSS stylesheet if needed -->
+    <!-- Include JavaScript validation if necessary -->
+</head>
+<body>
+<h1>Mini-Shopify</h1>
+<form id="createShopForm" action="/create-shop" method="post">
+    <label for="shopName">Store name:</label><br>
+    <input type="text" id="shopName" name="shopName" required><br>
+    <label for="shopDescription">Store description:</label><br>
+    <textarea id="shopDescription" name="shopDescription" required></textarea><br>
+
+    <label>Select shop categories (choose at least one):</label><br>
+    <input type="checkbox" id="clothes" name="categories" value="CLOTHES">
+    <label for="clothes">Clothes</label><br>
+    <input type="checkbox" id="appliances" name="categories" value="APPLIANCES">
+    <label for="appliances">Appliances</label><br>
+    <input type="checkbox" id="jewelry" name="categories" value="JEWELRY">
+    <label for="jewelry">Jewelry</label><br>
+    <input type="checkbox" id="decor" name="categories" value="DECOR">
+    <label for="decor">Decor</label><br>
+
+    <input type="submit" value="Create Shop">
+</form>
+<script>
+    document.getElementById('createShopForm').onsubmit = function() {
+        // Check if at least one checkbox is checked
+        var checkboxes = document.querySelectorAll('input[name="categories"]:checked');
+        if (checkboxes.length === 0) {
+            alert('Please select at least one category.');
+            // Optionally, you can focus the first checkbox to prompt the user
+            document.getElementById('clothes').focus();
+            return false; // Prevent form submission
+        }
+    };
+</script>
+</body>
+</html>

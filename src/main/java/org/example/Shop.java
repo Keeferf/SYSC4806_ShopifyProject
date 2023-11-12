@@ -1,20 +1,34 @@
 package org.example;
 import jakarta.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 @Entity
 public class Shop {
     @Id
     @GeneratedValue
     private Long id = null;
+    private String shopDescription;
     private String shopName = null;
-    private String shopDescription = null;
+    @ElementCollection(targetClass = Category.class, fetch = FetchType.EAGER)
+    @Enumerated(EnumType.STRING)
+    @CollectionTable(name = "shop_category")
+    @Column(name = "category")
+    private Set<Category> categories = null;
     @OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Product> products = null;
 
     //Enum for the category possibly
-    public Shop(String name){
+    public Shop(String name,String description, Set<Category> categories){
         this.shopName = name;
+        this.shopDescription = description;
+        if (categories == null) {
+            this.categories = new HashSet<>(); // Initialize with an empty HashSet if categories are null
+        } else {
+            this.categories = categories; // Use the provided categories
+        }
         this.products = new ArrayList<>();
     }
     public Shop(){}
@@ -33,6 +47,14 @@ public class Shop {
         if (product != null){
             products.add(product);
         }
+    }
+
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
     }
 
     public void removeProduct(Product product){
