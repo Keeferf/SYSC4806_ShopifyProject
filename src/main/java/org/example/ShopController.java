@@ -46,6 +46,6 @@ public class ShopController {
         Shop newShop = new Shop(shopName, shopDescription, categorySet);
         shopRepository.save(newShop);
         model.addAttribute("shop", newShop);
-        return "shop-created"; // Return a confirmation page
+        return "redirect:/miniShopify"; // Redirect to the main page
     }
 }

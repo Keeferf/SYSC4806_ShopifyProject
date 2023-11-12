@@ -31,6 +31,13 @@ public class Shop {
         }
         this.products = new ArrayList<>();
     }
+    public String getShopName() {
+        return shopName;
+    }
+    public String getShopDescription() {
+        return shopDescription;
+    }
+
     public Shop(){}
     public Long getId(){
         return this.id;

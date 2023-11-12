@@ -14,7 +14,12 @@
     <button type="submit" class="btn btn-primary">Create Shop</button>
 </form>
 
-<!-- Optionally, include other links or content here -->
+<h2>Shops:</h2>
+<div>
+    <ul>
+        <li th:each="shop : ${shops}" th:text="|Name: ${shop.shopName}, Description: ${shop.shopDescription}|"></li>
+    </ul>
+</div>
 
 </body>
 </html>
