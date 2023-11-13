@@ -2,9 +2,9 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [main]
   pull_request:
-    branches: [ "main" ]
+    branches: [main]
 
 jobs:
   build:
@@ -12,12 +12,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up JDK 20
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up JDK and Maven
       uses: actions/setup-java@v2
       with:
         java-version: '20'
         distribution: 'adopt'
-        cache: maven
+        maven-version: '3.8.4'  # Specify the version you want to use
+
     - name: Build with Maven
       run: mvn -B package --file pom.xml
