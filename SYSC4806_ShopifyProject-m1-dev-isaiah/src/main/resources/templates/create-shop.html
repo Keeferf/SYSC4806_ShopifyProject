@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Shop</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+
+        .container {
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 class="text-center">Create Shop</h1>
+    <form id="createShopForm" action="/create-shop" method="post">
+        <div class="form-group">
+            <label for="shopName">Store name:</label>
+            <input type="text" class="form-control" id="shopName" name="shopName" required>
+        </div>
+        <div class="form-group">
+            <label for="shopDescription">Store description:</label>
+            <textarea class="form-control" id="shopDescription" name="shopDescription" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Select shop categories (choose at least one):</label><br>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="clothes" name="categories" value="CLOTHES">
+                <label class="form-check-label" for="clothes">Clothes</label><br>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="appliances" name="categories" value="APPLIANCES">
+                <label class="form-check-label" for="appliances">Appliances</label><br>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="jewelry" name="categories" value="JEWELRY">
+                <label class="form-check-label" for="jewelry">Jewelry</label><br>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="decor" name="categories" value="DECOR">
+                <label class="form-check-label" for="decor">Decor</label><br>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Create Shop</button>
+    </form>
+</div>
+
+<script>
+    document.getElementById('createShopForm').onsubmit = function() {
+        // Check if at least one checkbox is checked
+        var checkboxes = document.querySelectorAll('input[name="categories"]:checked');
+        if (checkboxes.length === 0) {
+            alert('Please select at least one category.');
+            // Optionally, you can focus the first checkbox to prompt the user
+            document.getElementById('clothes').focus();
+            return false; // Prevent form submission
+        }
+    };
+</script>
+</body>
+</html>

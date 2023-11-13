@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Page</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .create-product-button {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 999;
+        }
+        .create-back-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+
+
+<div class="container mt-5">
+    <h1 class = 'text-center' th:text="${shop.shopName}"></h1>
+    <p class = 'text-center' th:text="${shop.shopDescription}"></p>
+    <div class="row">
+        <div class="col-md-4 mb-4" th:each="product : ${products}">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${product.getName()}"></h5>
+                    <p class="card-text" th:text="${product.getProductDescription()}"></p>
+                    <p class="card-text"><strong>Inventory:</strong> <span th:text="${product.getProductInventory()}"></span></p>
+                    <button class="btn btn-success add-to-cart-button" th:attr="data-product-id=${product.id}">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form th:action="@{/create-product}" method="get">
+        <button type = 'submit' class = 'btn btn-success create-product-button'>Create Product</button>
+    </form>
+    <a href = '/miniShopify' class = 'btn btn-success create-back-button'>Browse Shops</a>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Function to handle Add to Cart button click
+            $(".add-to-cart-button").click(function () {
+                // Get the product ID from the data attribute
+                var productId = $(this).data("product-id");
+
+                // You can implement your cart logic here
+                // For this example, we'll simply alert the user that the product has been added to the cart
+                alert("Product with ID " + productId + " added to cart!");
+            });
+        });
+
+    </script>
+</body>
+</html>
