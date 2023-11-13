@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/SYSC4806_ShopifyProject-m1-dev-isaiah/SYSC4806_ShopifyProject.iml" filepath="$PROJECT_DIR$/SYSC4806_ShopifyProject-m1-dev-isaiah/SYSC4806_ShopifyProject.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/SYSC4806_ShopifyProject-m1-dev-isaiah.iml" filepath="$PROJECT_DIR$/.idea/SYSC4806_ShopifyProject-m1-dev-isaiah.iml" />
     </modules>
   </component>
