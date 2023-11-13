@@ -23,4 +23,4 @@ jobs:
         maven-version: '3.8.4'  # Specify the version you want to use
 
     - name: Build with Maven
-      run: mvn -B package --file pom.xml
+      run: mvn -B package --file SYSC4806_ShopifyProject/SYSC4806_ShopifyProject-m1-dev-isaiah/pom.xml
