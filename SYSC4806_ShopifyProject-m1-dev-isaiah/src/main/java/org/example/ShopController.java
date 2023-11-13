@@ -29,6 +29,7 @@ public class ShopController {
     public String createShop(@RequestParam String shopName,
                              @RequestParam String shopDescription,
                              @RequestParam List<String> categories,
+                             @RequestParam String imageURL,
                              Model model) {
         Set<Category> categorySet = new HashSet<>();
         if (categories != null) {
@@ -43,7 +44,7 @@ public class ShopController {
             }
         }
 
-        Shop newShop = new Shop(shopName, shopDescription, categorySet);
+        Shop newShop = new Shop(shopName, shopDescription, categorySet, imageURL);
         shopRepository.save(newShop);
         model.addAttribute("shop", newShop);
         return "redirect:/miniShopify"; // Redirect to the main page

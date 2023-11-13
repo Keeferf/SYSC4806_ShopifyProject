@@ -12,6 +12,8 @@ public class Shop {
     private Long id = null;
     private String shopDescription;
     private String shopName = null;
+
+    private String imageURL;
     @ElementCollection(targetClass = Category.class, fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
     @CollectionTable(name = "shop_category")
@@ -21,9 +23,10 @@ public class Shop {
     private List<Product> products = null;
 
     //Enum for the category possibly
-    public Shop(String name,String description, Set<Category> categories){
+    public Shop(String name, String description, Set<Category> categories, String imageURL){
         this.shopName = name;
         this.shopDescription = description;
+        this.imageURL = imageURL;
         if (categories == null) {
             this.categories = new HashSet<>(); // Initialize with an empty HashSet if categories are null
         } else {
@@ -66,5 +69,13 @@ public class Shop {
 
     public void removeProduct(Product product){
         products.remove(product);
+    }
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
 }
