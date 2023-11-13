@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Grid</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .load-more-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 999;
+        }
+        .create-shop-button {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 999;
+        }
+        .shop-image {
+            width: auto;
+            height:200px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-5">
+    <h1 class="text-center">Shop Grid</h1>
+    <div class="row">
+        <div class="col-md-4 mb-4" th:each="shop : ${shops}">
+            <div class="card">
+                <img th:if="${shop.getImageURL()}" th:src="${shop.getImageURL()}" alt="Shop Image" class="card-img-top shop-image">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${shop.shopName}"></h5>
+                    <p class="card-text" th:text="${shop.shopDescription}"></p>
+                    <a th:href="@{'/shop/' + ${shop.id}}" class="btn btn-primary">More Details</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form th:action="@{/create-shop}" method="get">
+        <button type = 'submit' class = 'btn btn-success create-shop-button'>Create Shop</button>
+    </form>
+    <button class="btn btn-success load-more-button">Load More Shops</button>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
