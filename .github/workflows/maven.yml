@@ -20,5 +20,8 @@ jobs:
         java-version: '11'
         distribution: 'adopt'
       
+    - name: Change directory to the Maven project
+      run: cd /github/workspace/SYSC4806_ShopifyProject/SYSC4806_ShopifyProject-m1-dev-isaiah
+
     - name: Build with Maven
-      run: mvn -B package --file /github/workspace/SYSC4806_ShopifyProject/SYSC4806_ShopifyProject-m1-dev-isaiah/pom.xml
+      run: mvn -B package --file pom.xml
