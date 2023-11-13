@@ -8,7 +8,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -18,9 +17,7 @@ jobs:
     - name: Set up JDK and Maven
       uses: actions/setup-java@v2
       with:
-        java-version: '20'
-        distribution: 'adopt'
-        maven-version: '3.8.4'  # Specify the version you want to use
+        java-version: '11'
 
     - name: Build with Maven
       run: mvn -B package --file SYSC4806_ShopifyProject/SYSC4806_ShopifyProject-m1-dev-isaiah/pom.xml
