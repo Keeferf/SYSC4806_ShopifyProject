@@ -1,8 +1,10 @@
 package org.example;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.HashSet;
 import java.util.List;
@@ -47,5 +49,13 @@ public class ShopController {
         shopRepository.save(newShop);
         model.addAttribute("shop", newShop);
         return "redirect:/miniShopify"; // Redirect to the main page
+    }
+
+    @GetMapping("/shop/{id}")
+    public String viewShop(@PathVariable Long id, Model model) {
+        Shop shop = shopRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Shop not found"));
+        model.addAttribute("shop", shop);
+        return "shop-details"; // The name of the Thymeleaf template for viewing shop details
     }
 }

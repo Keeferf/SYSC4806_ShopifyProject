@@ -8,17 +8,17 @@ import java.util.Set;
 @Entity
 public class Shop {
     @Id
-    @GeneratedValue
-    private Long id = null;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String shopDescription;
-    private String shopName = null;
+    private String shopName;
     @ElementCollection(targetClass = Category.class, fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
     @CollectionTable(name = "shop_category")
     @Column(name = "category")
-    private Set<Category> categories = null;
+    private Set<Category> categories;
     @OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Product> products = null;
+    private List<Product> products;
 
     //Enum for the category possibly
     public Shop(String name,String description, Set<Category> categories){
@@ -67,4 +67,6 @@ public class Shop {
     public void removeProduct(Product product){
         products.remove(product);
     }
+
+
 }

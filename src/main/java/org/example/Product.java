@@ -4,17 +4,21 @@ import jakarta.persistence.*;
 public class Product {
     @Id
     @GeneratedValue
-    private Long id = null;
-    private String productName;
-    private String productDescription;
-    private int productInventory;
+    private Long id;
+    private String name;
+    private String description;
+    private int inventory;
+
+    @ManyToOne
+    @JoinColumn(name = "shop_id") // This is the foreign key column in the Product table.
+    private Shop shop;
 
     //image of the product
 
     public Product(String name, String description, int inventory){
-        this.productName = name;
-        this.productDescription = description;
-        this.productInventory = inventory;
+        this.name = name;
+        this.description = description;
+        this.inventory = inventory;
     }
     public Product(){}
 
@@ -24,9 +28,30 @@ public class Product {
     public void setId(Long id){
         this.id = id;
     }
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getDescription() {
+        return description;
+    }
+    public int getInventory() {
+        return inventory;
+    }
+    public Long getShopId() {
+        return shop != null ? shop.getId() : null;
+    }
+    public Shop getShop() {
+        return shop;
+    }
 
+    public void setShop(Shop shop) {
+        this.shop = shop;
+    }
     @Override
     public String toString(){
-        return "Product name: " + productName + "\n Description: " + productDescription + "\n Inventory: " + productInventory;
+        return "Product name: " + name + "\n Description: " + description + "\n Inventory: " + inventory;
     }
 }

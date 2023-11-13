@@ -2,8 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Mini-Shopify</title>
-    <!-- Add your CSS links here -->
-    <!-- Example: <link rel="stylesheet" th:href="@{/css/style.css}" /> -->
 </head>
 <body>
 
@@ -16,9 +14,17 @@
 
 <h2>Shops:</h2>
 <div>
-    <ul>
-        <li th:each="shop : ${shops}" th:text="|Name: ${shop.shopName}, Description: ${shop.shopDescription}|"></li>
+    <!-- Check if the shops list is not empty and display the list -->
+    <ul th:if="${not #lists.isEmpty(shops)}">
+        <li th:each="shop : ${shops}">
+            <!-- The th:text here will be replaced by the content inside the li, so use span to display text -->
+            <span th:text="|Name: ${shop.shopName}, Description: ${shop.shopDescription}|"></span>
+            <!-- This a tag now has access to the current shop variable because it's inside the li element -->
+            <a th:href="@{/shop/{id}(id=${shop.id})}" class="btn btn-info">View Shop</a>
+        </li>
     </ul>
+    <!-- Display a message if the shops list is empty -->
+    <p th:unless="${not #lists.isEmpty(shops)}">No shops available.</p>
 </div>
 
 </body>

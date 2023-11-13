@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create Product</title>
+    <!-- Include your CSS and other head elements here -->
+</head>
+<body>
+
+<h1>Create Product</h1>
+
+<!-- Update the form action to include the shop ID -->
+<form th:action="@{/shop/{shopId}/save-product(shopId=${shopId})}" th:object="${product}" method="post">
+    <div>
+        <label for="productName">Product name:</label><br>
+        <input type="text" id="productName" th:field="*{name}" required>
+    </div>
+    <div>
+        <label for="productDescription">Product description:</label><br>
+        <textarea id="productDescription" th:field="*{description}" required></textarea>
+    </div>
+    <div>
+        <label for="productInventory">Product inventory:</label><br>
+        <input type="number" id="productInventory" th:field="*{inventory}" required>
+    </div>
+    <!-- Hidden field for shop ID -->
+    <input type="hidden" th:field="*{shop.id}" th:value="${shopId}" />
+    <div>
+        <button type="submit" class="btn btn-success">Save Product</button>
+    </div>
+</form>
+
+<a href="javascript:history.back()">Go Back</a>
+
+</body>
+</html>

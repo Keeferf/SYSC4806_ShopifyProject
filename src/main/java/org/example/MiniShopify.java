@@ -34,6 +34,10 @@ public class MiniShopify {
             //save to repo
             shopRepository.save(shop1);
 
+            //check id
+            log.info("New shop saved with ID: {}", shop1.getId());
+            log.info("New product1 saved with ID: {}", product1.getId());
+
             // fetch individual buddy by ID
             Product foundProduct = productRepository.findById(product1.getId()).get();
             log.info("product found with findById():");
