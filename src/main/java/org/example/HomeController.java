@@ -28,7 +28,7 @@ public class HomeController {
     public String redirect() {
         return "redirect:/miniShopify";
     }
-
+    //test
     //show all the shops
     @GetMapping("/miniShopify")
     public String miniShopify(Model model) {
