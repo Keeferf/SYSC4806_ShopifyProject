@@ -12,7 +12,7 @@
 
 ## Naming of Files
 Camelcase no spaces/underscores.\
-Must accurately describe the goal of the file/class.
+Must accurately describe the goal of the file/class.\
 
 ## Setup Instructions
 
@@ -31,3 +31,5 @@ Nicholas Thibault -
 ## Implemented Features
 
 ## Known Issues
+
+## UML Diagram & Database Schema
