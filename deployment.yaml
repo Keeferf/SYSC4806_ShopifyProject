@@ -1,0 +1,21 @@
+# deployment.yaml content
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myshopifyapp-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myshopifyapp
+  template:
+    metadata:
+      labels:
+        app: myshopifyapp
+    spec:
+      containers:
+        - name: myshopifyapp
+          image: myshopifyapp:latest
+          imagePullPolicy: IfNotPresent  # Corrected indentation
+          ports:
+            - containerPort: 8080  # Ensure proper indentation

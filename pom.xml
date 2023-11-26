@@ -72,8 +72,13 @@
     </build>
 
     <properties>
+<<<<<<< HEAD
         <maven.compiler.source>18</maven.compiler.source>
         <maven.compiler.target>18</maven.compiler.target>
+=======
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+>>>>>>> 351d4797cb70181f058d6703f43c8190e733b6b5
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
