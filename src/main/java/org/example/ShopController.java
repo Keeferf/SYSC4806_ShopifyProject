@@ -33,7 +33,9 @@ public class ShopController {
                              @RequestParam String imageURL,
                              Model model,
                              Authentication authentication) {
+
         Set<Category> categorySet = new HashSet<>();
+        // Check to see if user is authenticated
         if (authentication != null && authentication.isAuthenticated()) {
             if (categories != null) {
                 for (String categoryStr : categories) {
