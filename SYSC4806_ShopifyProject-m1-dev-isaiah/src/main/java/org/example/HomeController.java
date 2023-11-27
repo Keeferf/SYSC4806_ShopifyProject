@@ -1,6 +1,6 @@
 package org.example;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,9 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Controller
 public class HomeController {
@@ -59,24 +57,31 @@ public class HomeController {
     }
 
     @PostMapping("/create-product")
-    public String createShop(@RequestParam Long shopId,
-                             @RequestParam String productName,
-                             @RequestParam String productDescription,
-                             @RequestParam int inventory,
-                             Model model) {
+    public String createProduct(@RequestParam Long shopId,
+                                @RequestParam String productName,
+                                @RequestParam String productDescription,
+                                @RequestParam int inventory,
+                                Model model,
+                                Authentication authentication) {
 
-        Product newProduct = new Product(productName, productDescription, inventory);
-        Shop shop = shopRepository.findById(shopId).orElse(null);
+        // Checks to see if user is authenticated
+        if (authentication != null && authentication.isAuthenticated()) {
+            Product newProduct = new Product(productName, productDescription, inventory);
+            Shop shop = shopRepository.findById(shopId).orElse(null);
 
-        if (shop != null) {
-            shop.addProduct(newProduct);
-            productRepository.save(newProduct);
-            shopRepository.save(shop);
-            model.addAttribute("product", newProduct);
-            return "redirect:/shop/" + shopId; // Redirect to the specific shop
+            if (shop != null) {
+                shop.addProduct(newProduct);
+                productRepository.save(newProduct);
+                shopRepository.save(shop);
+                model.addAttribute("product", newProduct);
+                return "redirect:/shop/" + shopId; // Redirect to the specific shop
+            } else {
+                return null;
+            }
         } else {
-            return null;
+            return "redirect:/login"; // Redirect to login, not authenticated yet
         }
+
     }
 
 
