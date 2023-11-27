@@ -24,7 +24,7 @@ Isaiah Hunte - 101201612
 
 Jestan Brar -
 
-Chia-Yu Liu -
+Chia-Yu Liu - 100698737
 
 Nicholas Thibault -
 
