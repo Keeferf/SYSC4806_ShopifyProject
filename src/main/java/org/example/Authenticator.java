@@ -21,7 +21,7 @@ public class Authenticator {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/login", "/miniShopify")
+                        .requestMatchers("/login", "/miniShopify", "/shop/{shopId}")
                         .permitAll().anyRequest().authenticated()
                 )
                 .formLogin((form) -> form
