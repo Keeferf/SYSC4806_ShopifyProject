@@ -1,5 +1,7 @@
 package org.example;
 import jakarta.persistence.*;
+import java.util.List;
+
 @Entity
 public class Product {
     @Id
@@ -8,6 +10,10 @@ public class Product {
     private String productName;
     private String productDescription;
     private int productInventory;
+
+    // Inside Product class
+    @ManyToMany(mappedBy = "cart", fetch = FetchType.LAZY)
+    private List<Customer> customers;
 
     //image of the product
 

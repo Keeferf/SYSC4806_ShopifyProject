@@ -16,6 +16,9 @@
             right: 20px;
             z-index: 999;
         }
+        .cart-button {
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -36,11 +39,35 @@
             </div>
         </div>
     </div>
+    <h1 class='text-center' th:text="${shop.shopName}"></h1>
+    <p class='text-center' th:text="${shop.shopDescription}"></p>
+    <div class="row">
+        <div class="col-md-4 mb-4" th:each="product : ${products}">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${product.getName()}"></h5>
+                    <p class="card-text" th:text="${product.getProductDescription()}"></p>
+                    <p class="card-text"><strong>Inventory:</strong> <span th:text="${product.getProductInventory()}"></span></p>
+                    <button class="btn btn-success add-to-cart-button" th:attr="data-product-id=${product.id}">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h2>Customers:</h2>
+    <ul>
+        <li th:each="customer : ${customers}">
+            <span th:text="${customer.name}"></span>
+            <ul>
+                <li th:each="product : ${customer.cart}">
+                    <span th:text="${product.productName}"></span>
+                </li>
+            </ul>
+        </li>
+    </ul>
     <form th:action="@{/create-product}" method="get">
         <button type = 'submit' class = 'btn btn-success create-product-button'>Create Product</button>
     </form>
     <a href = '/miniShopify' class = 'btn btn-success create-back-button'>Browse Shops</a>
-
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>

@@ -45,8 +45,13 @@ public class ShopController {
         }
 
         Shop newShop = new Shop(shopName, shopDescription, categorySet, imageURL);
+        Customer newCustomer = new Customer(); // Create a new customer
+        newCustomer.setShop(newShop); // Associate the customer with the shop
+        newShop.getCustomers().add(newCustomer); // Add the customer to the shop's list of customers
+
         shopRepository.save(newShop);
         model.addAttribute("shop", newShop);
+
         return "redirect:/miniShopify"; // Redirect to the main page
     }
 }

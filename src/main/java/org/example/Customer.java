@@ -1,7 +1,6 @@
 package org.example;
 
 import jakarta.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -12,19 +11,22 @@ public class Customer {
 
     private String name;
 
-    @ManyToMany
-    @JoinTable(name = "customer_cart",
-            joinColumns = @JoinColumn(name = "customer_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id"))
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Product> cart;
 
-    public Customer(String name) {
-        this.name = name;
-        this.cart = new ArrayList<>();
-    }
+    @ManyToOne
+    private Shop shop;
+
+    // Constructors, getters, setters, and other methods
 
     public Customer() {
+        // Default constructor
+    }
 
+    public Customer(String name, List<Product> cart, Shop shop) {
+        this.name = name;
+        this.cart = cart;
+        this.shop = shop;
     }
 
     public Long getId() {
@@ -51,11 +53,11 @@ public class Customer {
         this.cart = cart;
     }
 
-    public void addToCart(Product product) {
-        cart.add(product);
+    public Shop getShop() {
+        return shop;
     }
 
-    public void removeFromCart(Product product) {
-        cart.remove(product);
+    public void setShop(Shop shop) {
+        this.shop = shop;
     }
 }
