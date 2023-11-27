@@ -66,9 +66,10 @@ public class HomeController {
                              @RequestParam String productName,
                              @RequestParam String productDescription,
                              @RequestParam int inventory,
+                             @RequestParam int price,
                              Model model) {
 
-        Product newProduct = new Product(productName, productDescription, inventory);
+        Product newProduct = new Product(productName, productDescription, inventory, price);
         Shop shop = shopRepository.findById(shopId).orElse(null);
 
         if (shop != null) {

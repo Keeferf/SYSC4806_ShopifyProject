@@ -29,6 +29,7 @@ public class Customer {
         this.shop = shop;
     }
 
+
     public Long getId() {
         return id;
     }

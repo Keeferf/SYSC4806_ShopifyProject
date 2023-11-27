@@ -18,12 +18,14 @@ public class Product {
 
     //image of the product
 
-    public Product(String name, String description, int inventory){
+    public Product(String name, String description, int inventory, int price){
         this.productName = name;
         this.productDescription = description;
         this.productInventory = inventory;
+        this.price = price;
     }
     public Product(){}
+
 
     public Long getId(){
         return this.id;
