@@ -34,7 +34,6 @@
                     <h5 class="card-title" th:text="${shop.shopName}"></h5>
                     <p class="card-text" th:text="${shop.shopDescription}"></p>
                     <a th:href="@{'/shop/' + ${shop.id}}" class="btn btn-primary">More Details</a>
-                    <button class="btn btn-success view-cart-button" th:attr="data-shop-id=${shop.id}">View Cart</button>
                 </div>
             </div>
         </div>
