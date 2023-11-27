@@ -18,7 +18,7 @@ public class MiniShopify {
     }
 
     @Bean
-    public CommandLineRunner demo(ShopRepository shopRepository, ProductRepository productRepository) {
+    public CommandLineRunner demo(ShopRepository shopRepository, ProductRepository productRepository, CustomerRepository customerRepository) {
         return (args) -> {
             //create and save some products
             Product product1 = new Product("microwave", "kitchen appliance", 3);
@@ -78,7 +78,6 @@ public class MiniShopify {
                 log.info(foundProduct.toString());
             }
             log.info("");
-
         };
     }
 }

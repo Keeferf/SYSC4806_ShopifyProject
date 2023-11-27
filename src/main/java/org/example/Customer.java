@@ -1,63 +1,63 @@
-
 package org.example;
+
 import jakarta.persistence.*;
+import java.util.List;
+
 @Entity
 public class Customer {
-
     @Id
     @GeneratedValue
-    private Long id = null;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String phone;
+    private Long id;
+
+    private String name;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Product> cart;
 
     @ManyToOne
     private Shop shop;
 
-    public Customer(String firstName, String lastName, String email, String phone) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.phone = phone;
+    // Constructors, getters, setters, and other methods
+
+    public Customer() {
+        // Default constructor
     }
 
-    // Default constructor (satisfy JPA)
-    public Customer() {}
-
-    public String getFirstName() {
-        return firstName;
+    public Customer(String name, List<Product> cart, Shop shop) {
+        this.name = name;
+        this.cart = cart;
+        this.shop = shop;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public Long getId() {
+        return id;
     }
 
-    public String getLastName() {
-        return lastName;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public String getName() {
+        return name;
     }
 
-    public String getEmail() {
-        return email;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public List<Product> getCart() {
+        return cart;
     }
 
-    public String getPhone() {
-        return phone;
+    public void setCart(List<Product> cart) {
+        this.cart = cart;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public Shop getShop() {
+        return shop;
     }
 
-
-
-
+    public void setShop(Shop shop) {
+        this.shop = shop;
+    }
 }

@@ -16,12 +16,13 @@ import java.util.Set;
 public class HomeController {
     private ShopRepository shopRepository;
     private ProductRepository productRepository;
-
+    private CustomerRepository customerRepository;
 
     // Constructor injection of the ShopRepository
-    public HomeController(ShopRepository shopRepository, ProductRepository productRepository) {
+    public HomeController(ShopRepository shopRepository, ProductRepository productRepository, CustomerRepository customerRepository) {
         this.shopRepository = shopRepository;
         this.productRepository = productRepository;
+        this.customerRepository = customerRepository;
     }
 
     @GetMapping("/")
@@ -45,9 +46,11 @@ public class HomeController {
 
         // Find the products
         List<Product> products = shopRepository.findById(shopId).get().getProducts();
+        List<Customer> customers = shop.getCustomers();
 
         model.addAttribute("shop", shop);
         model.addAttribute("products", products);
+        model.addAttribute("customers", customers);
 
         return "shop-details";
 
