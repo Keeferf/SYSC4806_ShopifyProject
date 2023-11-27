@@ -10,6 +10,7 @@ public class Product {
     private String productName;
     private String productDescription;
     private int productInventory;
+    private int price;
 
     // Inside Product class
     @ManyToMany(mappedBy = "cart", fetch = FetchType.LAZY)
@@ -58,5 +59,13 @@ public class Product {
 
     public void setProductInventory(int productInventory){
         this.productInventory = productInventory;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 }

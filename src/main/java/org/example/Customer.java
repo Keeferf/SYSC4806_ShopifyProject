@@ -53,6 +53,16 @@ public class Customer {
         this.cart = cart;
     }
 
+    public int checkOut(List<Product> cart){
+        int sum = 0;
+
+        for(int i = 0; i < cart.size(); i++){
+            sum = sum + cart.get(i).getPrice();
+        }
+
+        return sum;
+    }
+
     public Shop getShop() {
         return shop;
     }
