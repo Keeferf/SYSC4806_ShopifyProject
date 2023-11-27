@@ -7,8 +7,8 @@
 * Keefer Belanger : 101152085
 * Isaiah Hunte : 101201612
 * Jestan Brar :
-* Chia-Yu Liu :
-* Nicholas Thibault:
+* Chia-Yu Liu : 100698737
+* Nicholas Thibault: 101172413
 
 ## Naming of Files
 Camelcase no spaces/underscores.\
@@ -26,7 +26,7 @@ Jestan Brar -
 
 Chia-Yu Liu - 100698737
 
-Nicholas Thibault -
+Nicholas Thibault - 101172413
 
 ## Implemented Features
 
