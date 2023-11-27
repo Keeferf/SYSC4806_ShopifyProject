@@ -12,7 +12,6 @@ public class Shop {
     private Long id = null;
     private String shopDescription;
     private String shopName = null;
-
     private String imageURL;
     @ElementCollection(targetClass = Category.class, fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)

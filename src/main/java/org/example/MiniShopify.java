@@ -18,7 +18,7 @@ public class MiniShopify {
     }
 
     @Bean
-    public CommandLineRunner demo(ShopRepository shopRepository, ProductRepository productRepository) {
+    public CommandLineRunner demo(ShopRepository shopRepository, ProductRepository productRepository, CustomerRepository customerRepository) {
         return (args) -> {
             //create and save some products
             Product product1 = new Product("microwave", "kitchen appliance", 3);
@@ -79,6 +79,27 @@ public class MiniShopify {
             }
             log.info("");
 
+            // Create and save a customer to repo
+            Customer customer = new Customer("John Doe");
+
+            // Add products to the customer's cart
+            customer.addToCart(product1);
+            customer.addToCart(product3);
+
+            // Save the updated customer to repo
+            customerRepository.save(customer);
+
+            // Fetch the customer by ID
+            Customer foundCustomer = customerRepository.findById(customer.getId()).orElse(null);
+
+            if (foundCustomer != null) {
+                log.info("Customer found with ID {}: {}", foundCustomer.getId(), foundCustomer.getName());
+
+                // Access the cart to force loading before logging
+                foundCustomer.getCart().forEach(product -> log.info("Product in the cart: {}", product));
+
+                log.info("HTML template: customer");
+            }
         };
     }
 }
