@@ -14,22 +14,19 @@ import java.util.Set;
 
 @Controller
 public class HomeController {
-    private ShopRepository shopRepository;
-    private ProductRepository productRepository;
-
+    private final ShopRepository shopRepository;
 
     // Constructor injection of the ShopRepository
-    public HomeController(ShopRepository shopRepository, ProductRepository productRepository) {
+    public HomeController(ShopRepository shopRepository) {
         this.shopRepository = shopRepository;
-        this.productRepository = productRepository;
     }
 
     @GetMapping("/")
     public String redirect() {
         return "redirect:/miniShopify";
     }
-    //test
-    //show all the shops
+
+    // Show all the shops
     @GetMapping("/miniShopify")
     public String miniShopify(Model model) {
         List<Shop> shops = (List<Shop>) shopRepository.findAll(); // Assuming you have a method to find all shops
@@ -37,48 +34,23 @@ public class HomeController {
         return "miniShopify"; // This should match the name of the HTML file without the .html extension
     }
 
-    //show all the products
+    // Show all the products in a shop
     @GetMapping("/shop/{shopId}")
     public String viewShopDetails(@PathVariable Long shopId, Model model) {
         // Find the shop by its ID
         Shop shop = shopRepository.findById(shopId).orElse(null);
+        if (shop == null) {
+            // Handle the case where the shop is not found
+            return "redirect:/miniShopify";
+        }
 
-        // Find the products
-        List<Product> products = shopRepository.findById(shopId).get().getProducts();
+        // Assuming getProducts is a method in your Shop class that returns a list of products
+        List<Product> products = shop.getProducts();
 
         model.addAttribute("shop", shop);
         model.addAttribute("products", products);
 
-        return "shop-details";
-
+        return "shop-details"; // This should match the name of the HTML file for the shop details view
     }
-
-    @GetMapping("/create-product")
-    public String showCreateProductForm(Model model) {
-        return "create-product"; // Return the name of the HTML file containing the form
-    }
-
-    @PostMapping("/create-product")
-    public String createShop(@RequestParam Long shopId,
-                             @RequestParam String productName,
-                             @RequestParam String productDescription,
-                             @RequestParam int inventory,
-                             Model model) {
-
-        Product newProduct = new Product(productName, productDescription, inventory);
-        Shop shop = shopRepository.findById(shopId).orElse(null);
-
-        if (shop != null) {
-            shop.addProduct(newProduct);
-            productRepository.save(newProduct);
-            shopRepository.save(shop);
-            model.addAttribute("product", newProduct);
-            return "redirect:/shop/" + shopId; // Redirect to the specific shop
-        } else {
-            return null;
-        }
-    }
-
-
 }
 

@@ -36,11 +36,11 @@
             </div>
         </div>
     </div>
-    <form th:action="@{/create-product}" method="get">
+    <form th:action="@{/shop/{shopId}/create-product(shopId=${shop.id})}" method="get">
         <button type = 'submit' class = 'btn btn-success create-product-button'>Create Product</button>
     </form>
     <a href = '/miniShopify' class = 'btn btn-success create-back-button'>Browse Shops</a>
-
+</div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
