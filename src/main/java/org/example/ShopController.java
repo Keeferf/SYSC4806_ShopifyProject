@@ -32,6 +32,7 @@ public class ShopController {
         return "create-shop"; // Return the name of the HTML file containing the form
     }
 
+
     @PostMapping("/create-shop")
     public String createShop(@RequestParam String shopName,
                              @RequestParam String shopDescription,

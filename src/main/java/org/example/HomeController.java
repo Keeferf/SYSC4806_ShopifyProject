@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Controller
@@ -83,6 +84,13 @@ public class HomeController {
         }
     }
 
+    @GetMapping("/search")
+    public String search(@RequestParam String query, Model model) {
+        // Perform the search using the query
+        List<Shop> searchResults = shopRepository.findByShopNameContainingIgnoreCase(query);
+        model.addAttribute("shops", searchResults);
+        return "shop-grid"; // Return the view that displays the search results
+    }
 
 }
 

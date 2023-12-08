@@ -16,9 +16,18 @@
             right: 20px;
             z-index: 999;
         }
+        .my-cart-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
     </style>
 </head>
 <body>
+
+<!-- "My Cart" button -->
+<a href="/cart" class="btn btn-warning my-cart-button">My Cart</a>
 
 <div class="container mt-5">
     <h1 class='text-center' th:text="${shop.shopName}">Shop Name</h1>
