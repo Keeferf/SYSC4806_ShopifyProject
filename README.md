@@ -6,7 +6,7 @@
 
 * Keefer Belanger : 101152085
 * Isaiah Hunte : 101201612
-* Jestan Brar : 
+* Jestan Brar : 101212208
 * Chia-Yu Liu : 100698737
 * Nicholas Thibault: 101172413
 
@@ -22,7 +22,7 @@ Keefer Belanger - 101152085
 
 Isaiah Hunte - 101201612
 
-Jestan Brar -
+Jestan Brar - 101212208
 
 Chia-Yu Liu - 100698737
 
