@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shop Grid</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .shop-image {
+            width: auto;
+            height: 200px;
+        }
+        .top-right-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        .back-to-shops-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+
+<!-- "My Cart" button -->
+<a href="/cart" class="btn btn-warning top-right-button">My Cart</a>
+<!-- "Back to Shops" button -->
+<a href="/miniShopify" class="btn btn-info back-to-shops-button">Back to Shops</a>
+
+<div class="container mt-5">
+    <h1 class="text-center">Shop Grid</h1>
+    <div class="row">
+        <!-- Loop through shops and display them -->
+        <div th:each="shop : ${shops}" class="col-md-4 mb-4">
+            <div class="card">
+                <img th:src="${shop.getImageURL()}" alt="Shop Image" class="card-img-top shop-image">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${shop.shopName}">Shop Name</h5>
+                    <p class="card-text" th:text="${shop.shopDescription}">Shop Description</p>
+                    <a th:href="@{'/shop/' + ${shop.id}}" class="btn btn-primary">More Details</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

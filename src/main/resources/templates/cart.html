@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Cart</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+    <h1>Shopping Cart</h1>
+    <!-- Here you will render the cart items dynamically with Thymeleaf -->
+    <div th:each="item : ${cartItems}">
+        <div th:text="${item.name}">Item Name</div>
+        <div th:text="${item.price}">Item Price</div>
+        <!-- Add more item details as needed -->
+    </div>
+    <div>Total: <span th:text="${totalPrice}">Total Price</span></div>
+
+    <!-- Back to Shops Button -->
+    <a href="/miniShopify" class="btn btn-primary">Back to Shops</a>
+</div>
+
+</body>
+</html>

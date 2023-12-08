@@ -16,48 +16,49 @@
             right: 20px;
             z-index: 999;
         }
+        .my-cart-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
     </style>
 </head>
 <body>
 
+<!-- "My Cart" button -->
+<a href="/cart" class="btn btn-warning my-cart-button">My Cart</a>
 
 <div class="container mt-5">
-    <h1 class = 'text-center' th:text="${shop.shopName}"></h1>
-    <p class = 'text-center' th:text="${shop.shopDescription}"></p>
+    <h1 class='text-center' th:text="${shop.shopName}">Shop Name</h1>
+    <p class='text-center' th:text="${shop.shopDescription}">Shop Description</p>
     <div class="row">
         <div class="col-md-4 mb-4" th:each="product : ${products}">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title" th:text="${product.getName()}"></h5>
-                    <p class="card-text" th:text="${product.getProductDescription()}"></p>
-                    <p class="card-text"><strong>Inventory:</strong> <span th:text="${product.getProductInventory()}"></span></p>
-                    <button class="btn btn-success add-to-cart-button" th:attr="data-product-id=${product.id}">Add to Cart</button>
+                    <h5 class="card-title" th:text="${product.name}">Product Name</h5>
+                    <p class="card-text" th:text="${product.productDescription}">Product Description</p>
+                    <p class="card-text"><strong>Inventory:</strong> <span th:text="${product.productInventory}">Inventory</span></p>
+                    <!-- Update: Add to Cart form -->
+                    <form th:action="@{/shop/{shopId}/add-to-cart(shopId=${shop.id})}" method="post">
+                        <input type="hidden" th:name="productId" th:value="${product.id}" />
+                        <button type="submit" class="btn btn-success">Add to Cart</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-    <form th:action="@{/create-product}" method="get">
-        <button type = 'submit' class = 'btn btn-success create-product-button'>Create Product</button>
+    <!-- Create Product Button -->
+    <form th:action="@{/shop/{shopId}/create-product(shopId=${shop.id})}" method="get">
+        <button type='submit' class='btn btn-success create-product-button'>Create Product</button>
     </form>
-    <a href = '/miniShopify' class = 'btn btn-success create-back-button'>Browse Shops</a>
-
+    <!-- Browse Shops Button -->
+    <a href='/miniShopify' class='btn btn-success create-back-button'>Browse Shops</a>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            // Function to handle Add to Cart button click
-            $(".add-to-cart-button").click(function () {
-                // Get the product ID from the data attribute
-                var productId = $(this).data("product-id");
 
-                // You can implement your cart logic here
-                // For this example, we'll simply alert the user that the product has been added to the cart
-                alert("Product with ID " + productId + " added to cart!");
-            });
-        });
-
-    </script>
 </body>
 </html>
