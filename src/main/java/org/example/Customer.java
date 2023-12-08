@@ -60,7 +60,6 @@ public class Customer {
         for(int i = 0; i < cart.size(); i++){
             sum = sum + cart.get(i).getPrice();
         }
-
         return sum;
     }
 
