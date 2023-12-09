@@ -1,5 +1,6 @@
 package org.example;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -25,14 +26,21 @@ public class ProductController {
     @PostMapping("/shop/{shopId}/create-product")
     public String createProduct(@PathVariable Long shopId,
                                 @ModelAttribute Product product,
-                                Model model) {
-        Shop shop = shopRepository.findById(shopId)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid Shop ID: " + shopId));
+                                Model model,
+                                Authentication authentication) {
 
-        shop.addProduct(product);
-        productRepository.save(product);
-        shopRepository.save(shop);
+        // Checks to see if user is authenticated
+        //if (authentication != null && authentication.isAuthenticated()) {
+            Shop shop = shopRepository.findById(shopId)
+                    .orElseThrow(() -> new IllegalArgumentException("Invalid Shop ID: " + shopId));
 
-        return "redirect:/shop/" + shopId; // Redirect to the specific shop's details page
-    }
+            shop.addProduct(product);
+            productRepository.save(product);
+            shopRepository.save(shop);
+
+            return "redirect:/shop/" + shopId; // Redirect to the specific shop's details page
+        }/* else {
+            return "redirect:/login"; // Redirect to log in, not authenticated yet
+        }
+    }*/
 }

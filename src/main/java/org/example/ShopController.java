@@ -44,7 +44,7 @@ public class ShopController {
 
         Set<Category> categorySet = new HashSet<>();
         // Check to see if user is authenticated
-        if (authentication != null && authentication.isAuthenticated()) {
+        //if (authentication != null && authentication.isAuthenticated()) {
             if (categories != null) {
                 for (String categoryStr : categories) {
                     try {
@@ -66,11 +66,11 @@ public class ShopController {
             model.addAttribute("shop", newShop);
 
             return "redirect:/miniShopify"; // Redirect to the main page
-        } else {
+        }/* else {
             // Redirect to the login page if the user is not authenticated
             return "redirect:/login";
         }
-    }
+    }*/
 
     @PostMapping("/shop/{shopId}/add-to-cart")
     public String addToCart(@PathVariable Long shopId, @RequestParam Long productId, HttpSession session, RedirectAttributes redirectAttributes) {

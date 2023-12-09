@@ -73,7 +73,7 @@ public class HomeController {
 
 
         // Checks to see if user is authenticated
-        if (authentication != null && authentication.isAuthenticated()) {
+        //if (authentication != null && authentication.isAuthenticated()) {
             Product newProduct = new Product(productName, productDescription, inventory, price);
             Shop shop = shopRepository.findById(shopId).orElse(null);
             if (shop != null) {
@@ -85,10 +85,10 @@ public class HomeController {
             } else {
                 return null;
             }
-        } else {
+        }/* else {
             return "redirect:/login"; // Redirect to login, not authenticated yet
         }
-    }
+    }*/
 
     @GetMapping("/search")
     public String search(@RequestParam String query, Model model) {
