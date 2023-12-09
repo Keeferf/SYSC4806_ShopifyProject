@@ -8,26 +8,30 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 @Controller
 public class HomeController {
     private ShopRepository shopRepository;
     private ProductRepository productRepository;
-
+    private CustomerRepository customerRepository;
 
     // Constructor injection of the ShopRepository
-    public HomeController(ShopRepository shopRepository, ProductRepository productRepository) {
+    public HomeController(ShopRepository shopRepository, ProductRepository productRepository, CustomerRepository customerRepository) {
         this.shopRepository = shopRepository;
         this.productRepository = productRepository;
+        this.customerRepository = customerRepository;
     }
 
     @GetMapping("/")
     public String redirect() {
         return "redirect:/miniShopify";
     }
-    //test
-    //show all the shops
+
+    // Show all the shops
     @GetMapping("/miniShopify")
     public String miniShopify(Model model) {
         List<Shop> shops = (List<Shop>) shopRepository.findAll(); // Assuming you have a method to find all shops
@@ -35,40 +39,43 @@ public class HomeController {
         return "miniShopify"; // This should match the name of the HTML file without the .html extension
     }
 
-    //show all the products
+    // Show all the products in a shop
     @GetMapping("/shop/{shopId}")
     public String viewShopDetails(@PathVariable Long shopId, Model model) {
         // Find the shop by its ID
         Shop shop = shopRepository.findById(shopId).orElse(null);
+        if (shop == null) {
+            // Handle the case where the shop is not found
+            return "redirect:/miniShopify";
+        }
 
         // Find the products
-        List<Product> products = shopRepository.findById(shopId).get().getProducts();
+        List<Product> products = shop.getProducts();
+        List<Customer> customers = shop.getCustomers();
+        // Assuming getProducts is a method in your Shop class that returns a list of products
+
 
         model.addAttribute("shop", shop);
         model.addAttribute("products", products);
+        model.addAttribute("customers", customers);
 
-        return "shop-details";
-
-    }
-
-    @GetMapping("/create-product")
-    public String showCreateProductForm(Model model) {
-        return "create-product"; // Return the name of the HTML file containing the form
+        return "shop-details"; // This should match the name of the HTML file for the shop details view
     }
 
     @PostMapping("/create-product")
-    public String createProduct(@RequestParam Long shopId,
-                                @RequestParam String productName,
-                                @RequestParam String productDescription,
-                                @RequestParam int inventory,
-                                Model model,
-                                Authentication authentication) {
+    public String createShop(@RequestParam Long shopId,
+                             @RequestParam String productName,
+                             @RequestParam String productDescription,
+                             @RequestParam int inventory,
+                             @RequestParam int price,
+                             Model model,
+                             Authentication authentication) {
+
 
         // Checks to see if user is authenticated
         if (authentication != null && authentication.isAuthenticated()) {
-            Product newProduct = new Product(productName, productDescription, inventory);
+            Product newProduct = new Product(productName, productDescription, inventory, price);
             Shop shop = shopRepository.findById(shopId).orElse(null);
-
             if (shop != null) {
                 shop.addProduct(newProduct);
                 productRepository.save(newProduct);
@@ -81,9 +88,15 @@ public class HomeController {
         } else {
             return "redirect:/login"; // Redirect to login, not authenticated yet
         }
-
     }
 
+    @GetMapping("/search")
+    public String search(@RequestParam String query, Model model) {
+        // Perform the search using the query
+        List<Shop> searchResults = shopRepository.findByShopNameContainingIgnoreCase(query);
+        model.addAttribute("shops", searchResults);
+        return "shop-grid"; // Return the view that displays the search results
+    }
 
 }
 

@@ -12,7 +12,6 @@ public class Shop {
     private Long id = null;
     private String shopDescription;
     private String shopName = null;
-
     private String imageURL;
     @ElementCollection(targetClass = Category.class, fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
@@ -21,6 +20,11 @@ public class Shop {
     private Set<Category> categories = null;
     @OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Product> products = null;
+
+    // Inside Shop class
+    @OneToMany(mappedBy = "shop", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Customer> customers;
+
 
     //Enum for the category possibly
     public Shop(String name, String description, Set<Category> categories, String imageURL){
@@ -33,6 +37,7 @@ public class Shop {
             this.categories = categories; // Use the provided categories
         }
         this.products = new ArrayList<>();
+        this.customers = new ArrayList<>();
     }
     public String getShopName() {
         return shopName;
@@ -77,5 +82,13 @@ public class Shop {
 
     public void setImageURL(String imageURL) {
         this.imageURL = imageURL;
+    }
+
+    public List<Customer> getCustomers() {
+        return customers;
+    }
+
+    public void setCustomers(List<Customer> customers) {
+        this.customers = customers;
     }
 }

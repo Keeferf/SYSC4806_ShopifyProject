@@ -1,5 +1,7 @@
 package org.example;
 import jakarta.persistence.*;
+import java.util.List;
+
 @Entity
 public class Product {
     @Id
@@ -8,15 +10,22 @@ public class Product {
     private String productName;
     private String productDescription;
     private int productInventory;
+    private int price;
+
+    // Inside Product class
+    @ManyToMany(mappedBy = "cart", fetch = FetchType.LAZY)
+    private List<Customer> customers;
 
     //image of the product
 
-    public Product(String name, String description, int inventory){
+    public Product(String name, String description, int inventory, int price){
         this.productName = name;
         this.productDescription = description;
         this.productInventory = inventory;
+        this.price = price;
     }
     public Product(){}
+
 
     public Long getId(){
         return this.id;
@@ -33,6 +42,7 @@ public class Product {
     public String getName(){
         return this.productName;
     }
+
 
     public void setName(String name){
         this.productName = name;
@@ -52,5 +62,13 @@ public class Product {
 
     public void setProductInventory(int productInventory){
         this.productInventory = productInventory;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 }

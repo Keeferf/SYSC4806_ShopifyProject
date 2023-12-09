@@ -7,7 +7,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @SpringBootApplication
@@ -18,16 +20,16 @@ public class MiniShopify {
     }
 
     @Bean
-    public CommandLineRunner demo(ShopRepository shopRepository, ProductRepository productRepository) {
+    public CommandLineRunner demo(ShopRepository shopRepository, ProductRepository productRepository, CustomerRepository customerRepository) {
         return (args) -> {
             //create and save some products
-            Product product1 = new Product("microwave", "kitchen appliance", 3);
-            Product product2 = new Product("knife", "to cut things", 6);
-            Product product3 = new Product("Air Forces 2", "Mint Condition, 2oz", 1);
-            Product product4 = new Product("Diamond Necklace", "$1300, pure quality, 100% guarantee", 5);
-            Product product5 = new Product("Wooden Desk", "Oak hardwood", 3);
-            Product product6 = new Product("Lenovo Laptop", "$1250, 1060 GPU, limited sale", 2);
-            Product product7 = new Product("Navy Blue Jeans", "Skinny fit, size 36 waist", 10);
+            Product product1 = new Product("microwave", "kitchen appliance", 3, 10);
+            Product product2 = new Product("knife", "to cut things", 6, 20);
+            Product product3 = new Product("Air Forces 2", "Mint Condition, 2oz", 1,30);
+            Product product4 = new Product("Diamond Necklace", "$1300, pure quality, 100% guarantee", 5,40);
+            Product product5 = new Product("Wooden Desk", "Oak hardwood", 3,50);
+            Product product6 = new Product("Lenovo Laptop", "$1250, 1060 GPU, limited sale", 2,60);
+            Product product7 = new Product("Navy Blue Jeans", "Skinny fit, size 36 waist", 10,70);
 
             //create a shop and add products
             Set<Category> categories = new HashSet<>();
@@ -78,6 +80,19 @@ public class MiniShopify {
                 log.info(foundProduct.toString());
             }
             log.info("");
+
+            //test checkOut function
+            List<Product> cart = new ArrayList<Product>();
+            cart.add(product1);
+            cart.add(product2);
+            cart.add(product3);
+
+            Customer customer1 = new Customer("name1", cart, shop1);
+
+            int total = customer1.checkOut(cart);
+            log.info("total:" + total);
+
+
 
         };
     }

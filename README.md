@@ -6,7 +6,7 @@
 
 * Keefer Belanger : 101152085
 * Isaiah Hunte : 101201612
-* Jestan Brar :
+* Jestan Brar : 101212208
 * Chia-Yu Liu : 100698737
 * Nicholas Thibault: 101172413
 
@@ -16,13 +16,13 @@ Must accurately describe the goal of the file/class.\
 
 ## Setup Instructions
 
-## Project Iteration 1 - Breakdown of Responsibilities
+## Project Iteration 2 - Breakdown of Responsibilities
 
 Keefer Belanger - 101152085
 
 Isaiah Hunte - 101201612
 
-Jestan Brar -
+Jestan Brar - 101212208
 
 Chia-Yu Liu - 100698737
 
@@ -30,7 +30,11 @@ Nicholas Thibault - 101172413
 
 ## Implemented Features
 
+A service mesh architecture has been added to the existing shopify code.
+
 ## Known Issues
+
+Implementation of special features, not currently working.
 
 ## UML Diagram & Database Schema
 ![UML Diagram](/diagrams/SYSC4806_ShopifyProject_UML.png)
